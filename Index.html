@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#dugme").click(function () {
+                $.ajax({
+                    url: "https://andruxnet-random-famous-quotes.p.mashape.com/?cat="+ $('input[name="tip"]:checked').val() +"&count=1",
+                    type: "POST",
+
+                    headers: {
+                        "X-Mashape-Key": "TTx6ozUtP9mshQASSYqlnSlXP0E6p1VWRwUjsn7CsYsFufgBqH"
+                    },
+                    success: function (html) {
+                        var obj = html;
+                        $("#citat").empty();
+                        $("#citat").append("<b>"+obj.quote+"</b> - "+obj.author);
+                    }
+                })
+            });
+        });
+    </script>
+</head>
+
+<body>
+        <form id="izbor">
+                <input type="radio" name="tip" value="movies" checked> film<br>
+                <input type="radio" name="tip" value="famous"> poznati<br>
+              </form>
+    <button id="dugme">Generisi citat</button>
+    <div id="citat"></div>
+</body>
+
+</html>
